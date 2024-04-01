@@ -1,7 +1,7 @@
 
-# ATM Interface
+# Number Guessing Game
 
-This Application is build using Java programming language.
+This Game is build using Java programming language.
 
 You need Java 19+ versions to run this application.
 
@@ -14,12 +14,12 @@ Download latest version of Java from here : https://www.oracle.com/java/technolo
 
 First type the below command to compile the code.
 ```
-    javac Main.java
+    javac RandomNumberGame.java
 ```
 
 then type this command to run it.
 ```
-    java Main
+    java RandomNumberGame
 ```
 
 ## Developer Info:
