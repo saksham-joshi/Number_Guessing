@@ -29,7 +29,7 @@ public class RandomNumberGame extends JFrame {
     final static private String APP_TITLE = "Random Guess";
     
     final static private Font BUTTON_FONT = new Font("verdana", Font.BOLD, 12);
-    final static private Font HINT_FONT = new Font("verdana", Font.BOLD, 14);
+    final static private Font HINT_FONT = new Font("verdana", Font.BOLD, 13);
     final static private Font NUMBER_FIELD_FONT = new Font("arial", Font.BOLD,14);
     final static private Font MESSAGE_LABEL_FONT = new Font("arial", Font.BOLD, 14);
 
@@ -46,6 +46,9 @@ public class RandomNumberGame extends JFrame {
 
     private int randomNumber;
     private int chancesLeft = 2;
+
+    private int min = 0;
+    private int max = 0;
 
     public RandomNumberGame() {
         setTitle(RandomNumberGame.APP_TITLE);
@@ -141,11 +144,14 @@ public class RandomNumberGame extends JFrame {
     }
 
     private int generateRandomNumber(int min, int max) {
+        this.min = min;
+        this.max = max;
         return new Random().nextInt(max - min + 1) + min;
     }
 
     private void updateChancesLeft(){
         this.messageLabel.setText("Chances Left: "+this.chancesLeft);
+        this.messageLabel.setVisible(true);
     }
 
     private void playingAgain(){
@@ -154,6 +160,8 @@ public class RandomNumberGame extends JFrame {
         this.difficultyComboBox.setVisible(true);
 
         this.numberField.setVisible(false);
+        this.numberField.setText("");
+
         this.checkButton.setVisible(false);
         this.hintLabel.setVisible(false);
         this.messageLabel.setVisible(false);
@@ -164,7 +172,7 @@ public class RandomNumberGame extends JFrame {
             messageLabel.setText("Try Again! You will win.");
             return;
         }
-        String numberStr = numberField.getText();
+        String numberStr = numberField.getText().trim() ;
         if (numberStr.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Please enter a number.");
             return;
@@ -177,6 +185,7 @@ public class RandomNumberGame extends JFrame {
             if (chancesLeft == 1) {
                 JOptionPane.showMessageDialog(this , "Try again... You will Win!","Lack of Luck!",JOptionPane.PLAIN_MESSAGE);
                 playingAgain();
+                return;
             } else {
                 this.updateChancesLeft();
                 
@@ -187,6 +196,7 @@ public class RandomNumberGame extends JFrame {
     }
 
     private void makeHint(){
+        hintLabel.setText("Range is "+this.min+" and "+this.max+" .\n");
         if (randomNumber % 2 == 0) {
             hintLabel.setText(hintLabel.getText() + "The number is even and");
         } else {
